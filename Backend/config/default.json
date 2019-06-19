@@ -1,7 +1,0 @@
-{
-	"database" : {
-		"host" : "localhost",
-		"user" : "dba",
-		"password" : "master"
-	}
-}
