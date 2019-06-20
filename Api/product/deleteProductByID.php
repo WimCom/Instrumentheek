@@ -33,7 +33,7 @@ $product->ProductID = $data->productID;
 
 if($product->getProductByID())
 {
-	echo json_encode($product);
+	echo json_encode($product->deleteProduct());
 }
 else
 {
