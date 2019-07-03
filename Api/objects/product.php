@@ -17,6 +17,7 @@ class Product{
 	public $Info;
 	public $PictureList;
 	public $Lendings;
+	public $Status;//0: normal, 1: maintenance, 2: repair
 	
  
     // constructor with $db as database connection
@@ -30,7 +31,7 @@ class Product{
 	function read(){
 		
 		// select all query
-		$query = "SELECT ProductId,ProductName,CreationDate,ProductCode,CategoryID,Active FROM products_lookup WHERE Active = 1";
+		$query = "SELECT ProductId,ProductName,CreationDate,ProductCode,CategoryID,Active,Status FROM products_lookup WHERE Active = 1";
 	 
 		// prepare query statement
 		$stmt = $this->conn->prepare($query);
@@ -132,6 +133,21 @@ class Product{
 
 		$stmt->bindParam(":ProductId", $this->ProductID);
 		
+		// execute query
+		if($stmt->execute())
+		{
+			return true;
+		}
+		return false;   
+	}
+	function updateProductStatus()
+	{
+		echo( $this->Status);
+		$query = "UPDATE products_lookup SET Status = :Status WHERE ProductId = :ProductId";
+		$stmt = $this->conn->prepare($query);
+
+		$stmt->bindParam(":ProductId", $this->ProductID);
+		$stmt->bindParam(":Status", $this->Status);
 		// execute query
 		if($stmt->execute())
 		{
