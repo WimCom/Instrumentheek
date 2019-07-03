@@ -98,7 +98,7 @@ class Product{
 	}
 	
 	function getProductByID(){
-		$query = "SELECT ProductName, CreationDate, ProductCode, CategoryID, Active FROM products_lookup WHERE ProductID = :productID";
+		$query = "SELECT ProductName, CreationDate, ProductCode, CategoryID, Active, Status FROM products_lookup WHERE ProductID = :productID";
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(":productID", $this->ProductID);
 		
@@ -120,7 +120,7 @@ class Product{
 			$inf->ProductID = $this->ProductID;
 			$inf->getProductInfo();
 			$this->Info = $inf;
-			
+			$this->Status = $row['Status'];
 			return true;
 		}
 	 
@@ -142,7 +142,6 @@ class Product{
 	}
 	function updateProductStatus()
 	{
-		echo( $this->Status);
 		$query = "UPDATE products_lookup SET Status = :Status WHERE ProductId = :ProductId";
 		$stmt = $this->conn->prepare($query);
 

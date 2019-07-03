@@ -27,25 +27,19 @@ $validation->validateToken($data->token);
 
 if($validation->Role == 0)
 {
-	echo '{';
-       echo '"message": "Token invalid"';
-    echo '}';
-	return ;
+	exit(json_encode(array("status" => 0, "msg" => "No valid token!")));
 }
 
 if($validation->Role < 2)
 {
-	echo '{';
-       echo '"message": "No permission!"';
-    echo '}';
-	return ;
+	exit(json_encode(array("status" => 0, "msg" => "No permission!")));
 }
 
 
 // set product property values
 $product->ProductID = $data->productID;
 $product->getProductByID();
-if($product->Status == $data->status)
+if(intval($product->Status) == intval($data->status))
 {
 	exit(json_encode(array("status" => 0, "msg" => "Status was already the status")));
 }

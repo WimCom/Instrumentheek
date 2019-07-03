@@ -138,7 +138,8 @@ if($num>0){
 			"Category" => $category_item,
 			"CurrentLending" => $lending_item,
 			"Info" => $info_item,
-			"PictureList" => $picture_arr
+			"PictureList" => $picture_arr,
+			"Status" => intval($row['Status'])
 		);
 		array_push($products_arr, $product_item);
 		$product_item = "";
